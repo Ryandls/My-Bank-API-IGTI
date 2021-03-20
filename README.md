@@ -14,7 +14,7 @@ Essa API foi desenvolvido com as seguintes tecnologias:
 - JavaScript
 - Node.js
 - Utilizando as bibliotecas: Express, Winston, File System, Cors e Swagger-Ui-Express.
--Insomnia - para teste de Request HTTP.
+- Insomnia - para teste de Request HTTP.
 
 ## 🔖 Objetivo da API
 
