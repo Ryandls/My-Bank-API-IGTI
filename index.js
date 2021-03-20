@@ -3,6 +3,7 @@ import accountsRouter from './routes/accounts.js';
 import { promises as fs, write } from 'fs';
 
 const { readFile, writeFile } = fs;
+global.fileName = 'accounts.json';
 
 const app = express();
 app.use(express.json());
@@ -11,14 +12,14 @@ app.use('/account', accountsRouter);
 
 app.listen(3000, async () => {
   try {
-    await readFile('accounts.json');
+    await readFile(global.fileName);
     console.log('API Started!!');
   } catch (err) {
     const initialJson = {
       nextID: 1,
       accounts: [],
     };
-    writeFile('accounts.json', JSON.stringify(initialJson))
+    writeFile('global.fileName', JSON.stringify(initialJson))
       .then(() => {
         console.log('API Started and File Created!');
       })
