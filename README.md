@@ -1,7 +1,7 @@
 <img alt="Gif-App" class="img" title="Na gravação do Gif, a imagem veio bugada por conta do aplicativo de gravação." src="./img/API.gif"/>
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Objetivo da API</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Objetivo da API</a>&nbsp;&nbsp;&nbsp;
 
 </p>
 
