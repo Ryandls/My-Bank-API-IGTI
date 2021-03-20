@@ -5,6 +5,7 @@ const { readFile, writeFile } = fs;
 
 const router = express.Router();
 
+//POST add
 router.post('/', async (req, res) => {
   try {
     let account = req.body;
@@ -21,6 +22,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//get for all
 router.get('/', async (req, res) => {
   try {
     const data = JSON.parse(await readFile(global.fileName));
@@ -30,7 +32,7 @@ router.get('/', async (req, res) => {
     res.status(400).send({ error: err.message });
   }
 });
-
+//get by id
 router.get('/:id', async (req, res) => {
   try {
     const data = JSON.parse(await readFile(global.fileName));
@@ -43,6 +45,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//delete by id
 router.delete('/:id', async (req, res) => {
   try {
     const data = JSON.parse(await readFile(global.fileName));
@@ -51,6 +54,38 @@ router.delete('/:id', async (req, res) => {
     );
     await writeFile(global.fileName, JSON.stringify(data, null, 2));
     res.end();
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+//put update all
+router.put('/', async (req, res) => {
+  try {
+    const account = req.body;
+    const data = JSON.parse(await readFile(global.fileName));
+    const index = data.accounts.findIndex((a) => a.id === account.id);
+
+    data.accounts[index] = account;
+
+    await writeFile(global.fileName, JSON.stringify(data));
+    res.send(account);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+//update only balance
+router.patch('/updateBalance', async (req, res) => {
+  try {
+    const account = req.body;
+    const data = JSON.parse(await readFile(global.fileName));
+    const index = data.accounts.findIndex((a) => a.id === account.id);
+
+    data.accounts[index].balance = account.balance;
+
+    await writeFile(global.fileName, JSON.stringify(data));
+    res.send(data.accounts[index]);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
