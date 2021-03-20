@@ -1,6 +1,6 @@
 import express from 'express';
 import { promises as fs } from 'fs';
-
+import cors from 'cors';
 const { readFile, writeFile } = fs;
 
 const router = express.Router();
@@ -9,9 +9,18 @@ const router = express.Router();
 router.post('/', async (req, res, next) => {
   try {
     let account = req.body;
+
+    if (!account.name || account.balance == null) {
+      throw new Error('Name e Balance são Obrigatórios');
+    }
+
     const data = JSON.parse(await readFile(global.fileName));
 
-    account = { id: data.nextID++, ...account };
+    account = {
+      id: data.nextID++,
+      name: account.name,
+      balance: account.balance,
+    };
     data.accounts.push(account);
 
     await writeFile(global.fileName, JSON.stringify(data, null, 2));
@@ -25,7 +34,7 @@ router.post('/', async (req, res, next) => {
 });
 
 //get for all
-router.get('/', async (req, res, next) => {
+router.get('/', cors(), async (req, res, next) => {
   try {
     const data = JSON.parse(await readFile(global.fileName));
     delete data.nextID;
@@ -71,9 +80,19 @@ router.put('/', async (req, res, next) => {
     const data = JSON.parse(await readFile(global.fileName));
     const index = data.accounts.findIndex((a) => a.id === account.id);
 
-    data.accounts[index] = account;
+    if (!account.id || !account.name || account.balance == null) {
+      throw new Error('Name e Balance são Obrigatórios');
+    }
 
-    await writeFile(global.fileName, JSON.stringify(data));
+    if (index === -1) {
+      throw new Error('Registro não encotrado.');
+    }
+    console.log(index);
+
+    data.accounts[index].name = account.name;
+    data.accounts[index].balance = account.balance;
+
+    await writeFile(global.fileName, JSON.stringify(data, null, 2));
     res.send(account);
     logger.info(`PUT /account - ${JSON.stringify(account)}`);
   } catch (err) {
@@ -88,9 +107,15 @@ router.patch('/updateBalance', async (req, res, next) => {
     const data = JSON.parse(await readFile(global.fileName));
     const index = data.accounts.findIndex((a) => a.id === account.id);
 
+    if (!account.nextID || account.balance == null) {
+      throw new Error('ID e Balance são Obrigatórios');
+    }
+    if (index === -1) {
+      throw new Error('Registro não encotrado.');
+    }
     data.accounts[index].balance = account.balance;
 
-    await writeFile(global.fileName, JSON.stringify(data));
+    await writeFile(global.fileName, JSON.stringify(data, null, 2));
     res.send(data.accounts[index]);
     logger.info(`PATCH /account/updateBalance - ${JSON.stringify(account)}`);
   } catch (err) {

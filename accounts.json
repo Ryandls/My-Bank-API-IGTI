@@ -1,15 +1,1 @@
-{
-  "nextID": 3,
-  "accounts": [
-    {
-      "id": 1,
-      "name": "Bryan Alves",
-      "balance": 5000.5
-    },
-    {
-      "id": 2,
-      "name": "Douglas Alves",
-      "balance": 6000.5
-    }
-  ]
-}
+{"nextID":10,"accounts":[{"id":1,"name":"Douglas Chaves","balance":3500},{"id":2,"name":"Douglas Alves","balance":4800},{"id":3,"name":"Maycon Alves","balance":500.5},{"id":4,"name":"Bryan Alves","balance":6000.5},{"id":5,"name":"Douglas Silva","balance":6000.5}]}
