@@ -1,0 +1,24 @@
+{
+  "name": "My-Bank-API-IGTI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ryandls/My-Bank-API-IGTI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Ryandls/My-Bank-API-IGTI/issues"
+  },
+  "homepage": "https://github.com/Ryandls/My-Bank-API-IGTI#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
